@@ -1,0 +1,109 @@
+<WindowManager>:
+
+    Screen:
+        name: "login_window"
+        AnchorLayout:
+            anchor_x:'center'
+            anchor_y:'top'
+            size_hint:1, 0.9
+            MDBoxLayout:
+                orientation:'vertical'
+                size_hint:.95,.45
+                MDTextField:
+                    id:login_input
+                    hint_text:"Login"
+                MDTextField:
+                    id:password_input
+                    hint_text:'Password'
+                MDLabel:
+                    id:status_check
+                    text:''
+
+                MDIconButton:
+                    icon: "arrow-right-circle"
+                    pos_hint: {"center_x": .5, "center_y": .5}
+                    icon_size:"50sp"
+                    on_press: root.check_init(root, login_input, password_input, status_check)
+
+    Screen:
+        name: "menu_window"
+        on_enter: root.print_text(user)
+
+        MDLabel:
+            id:user
+            text: "User:"
+            font_size:20
+            size_hint:.55,.1
+            halign: "left"
+            pos_hint: {"center_x": .5, "center_y": .95}
+        MDFillRoundFlatButton:
+            text: "Admin"
+            font_size: 30
+            size_hint:.6,.1
+            pos_hint: {"center_x": .5, "center_y": .85}
+            on_press:
+                root.check_root(root, status_root)
+
+        MDFillRoundFlatButton:
+            text: "Button"
+            font_size: 30
+            size_hint:.6,.1
+            pos_hint: {"center_x": .5, "center_y": .7}
+
+        MDFillRoundFlatButton:
+            text: "Button"
+            font_size: 30
+            size_hint:.6,.1
+            pos_hint: {"center_x": .5, "center_y": .55}
+        MDLabel:
+            id:status_root
+            text: ""
+            font_size:15
+            size_hint:.5,.1
+            bold: True
+            halign: "center"
+            pos_hint: {"center_x": .5, "center_y": .45}
+
+        MDFillRoundFlatButton:
+            text: "Exit"
+            font_size: 30
+            size_hint:.6,.1
+            pos_hint: {"center_x": .5, "center_y": .15}
+            on_press:
+                root.login_menu(root, status_root)
+
+
+    Screen:
+        name: "admin_window"
+        AnchorLayout:
+            anchor_x:'center'
+            anchor_y:'top'
+            size_hint:1, 0.9
+            MDBoxLayout:
+                orientation:'vertical'
+                size_hint:.95,.45
+                MDLabel:
+                    text:'Введите нового пользователя:'
+
+                MDTextField:
+                    id:new_login_input
+                    hint_text:"Login"
+                MDTextField:
+                    id:new_password_input
+                    hint_text:'Password'
+                MDLabel:
+                    id:new_status_check
+                    text:''
+                MDBoxLayout:
+                    MDFillRoundFlatButton
+                        text: "Добавить"
+                        text_size: 25
+                        on_press:
+                            root.registration(root, new_login_input, new_password_input, new_status_check)
+                    Widget:
+
+                    MDFillRoundFlatButton
+                        text: "Выход"
+                        text_size: 25
+                        on_press:
+                            root.main_menu(root,new_login_input,new_password_input,new_status_check)
